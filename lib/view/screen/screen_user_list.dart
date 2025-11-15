@@ -156,7 +156,13 @@ class _ScreenUserListState extends State<ScreenUserList> {
               },
               child: ListView(
                 controller: scrollController,
-                padding: EdgeInsets.all(25),
+                padding:
+                    MediaQuery.of(context).size.width > 750
+                        ? EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.2,
+                          vertical: 25,
+                        )
+                        : EdgeInsets.all(25),
                 physics: BouncingScrollPhysics(),
                 children: [
                   CustomTextFormField(
@@ -258,7 +264,7 @@ class _ScreenUserListState extends State<ScreenUserList> {
     return Column(
       children: [
         GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             context.push(AppRouter.screenUserDetails, extra: user);

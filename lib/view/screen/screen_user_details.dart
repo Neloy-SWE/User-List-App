@@ -19,7 +19,8 @@ class ScreenUserDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(AppText.userDetails)),
       body: ListView(
-        padding: EdgeInsets.all(25),
+        padding: MediaQuery.of(context).size.width > 750
+            ? EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.2, vertical: 35) : EdgeInsets.all(25),
         physics: BouncingScrollPhysics(),
         children: [
           Align(

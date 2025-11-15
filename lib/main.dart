@@ -10,8 +10,10 @@ import 'package:user_list_app/view/utility/app_text.dart';
 import 'package:user_list_app/view/utility/app_theme.dart';
 
 void main() async {
+  // initialize dependencies:
   WidgetsFlutterBinding.ensureInitialized();
   await injectService();
+
   runApp(MyApp());
 }
 
