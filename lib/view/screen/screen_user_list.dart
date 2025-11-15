@@ -3,12 +3,12 @@ Created by Neloy on 15 November, 2025.
 Email: taufiqneloy.swe@gmail.com
 */
 
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:user_list_app/network/model/model_user_list.dart';
+import 'package:user_list_app/router/app_router.dart';
 import 'package:user_list_app/view/custom_widget/custom_dialogue.dart';
 import 'package:user_list_app/view/custom_widget/custom_text_form_field.dart';
 import 'package:user_list_app/view/utility/app_color.dart';
@@ -16,6 +16,7 @@ import 'package:user_list_app/view/utility/app_size.dart';
 import 'package:user_list_app/view/utility/app_text.dart';
 
 import '../../bloc/bloc_get_user_list/bloc_get_user_list.dart';
+import '../custom_widget/custom_profile_image_view.dart';
 
 class ScreenUserList extends StatefulWidget {
   const ScreenUserList({super.key});
@@ -256,43 +257,30 @@ class _ScreenUserListState extends State<ScreenUserList> {
   Widget _userlistView({required User user}) {
     return Column(
       children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColor.colorPrimary, width: 1),
-          ),
-          child: Row(
-            children: [
-              Container(
-                height: 44,
-                width: 44,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  border: Border.all(color: AppColor.colorPrimary, width: 1),
-                ),
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(user.avatar!),
-                      fit: BoxFit.fill,
-                    ),
+        GestureDetector(
+          onTap: (){
+            FocusManager.instance.primaryFocus?.unfocus();
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            context.push(AppRouter.screenUserDetails, extra: user);
+          },
+          child: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColor.colorPrimary, width: 1),
+            ),
+            child: Row(
+              children: [
+                CustomProfileImageView(radius: 20, imageLink: user.avatar!),
+                Expanded(
+                  child: Text(
+                    "${user.firstName!} ${user.lastName!}",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-              ),
-              Expanded(
-                child: Text(
-                  "${user.firstName!} ${user.lastName!}",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         AppSize.gapH15,

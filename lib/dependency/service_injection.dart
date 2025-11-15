@@ -7,7 +7,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:get_it/get_it.dart';
-import 'package:user_list_app/bloc/bloc_get_user_list/bloc_get_user_list.dart';
 import 'package:user_list_app/network/api/api_get_user_list/api_call_get_user_list.dart';
 import 'package:user_list_app/network/api/api_get_user_list/i_api_call_get_user_list.dart';
 import 'package:user_list_app/network/client/client.dart';

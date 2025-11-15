@@ -3,7 +3,6 @@ Created by Neloy on 15 November, 2025.
 Email: taufiqneloy.swe@gmail.com
 */
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';

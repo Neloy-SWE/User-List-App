@@ -13,4 +13,7 @@ class AppText {
   static const String okay = "Okay";
   static const String search = "Search";
   static const String exampleName = "Mr. AAA";
+  static const String userDetails = "User Details";
+  static const String emailColon = "Email: ";
+  static const String phoneColon = "Phone: ";
 }

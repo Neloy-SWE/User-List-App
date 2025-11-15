@@ -9,7 +9,9 @@ import 'package:go_router/go_router.dart';
 import 'package:user_list_app/bloc/bloc_get_user_list/bloc_get_user_list.dart';
 import 'package:user_list_app/dependency/service_injection.dart';
 import 'package:user_list_app/network/connection_check/i_connection_check.dart';
+import 'package:user_list_app/network/model/model_user_list.dart';
 import 'package:user_list_app/network/repository/repository_get_user_list/i_repository_get_user_list.dart';
+import 'package:user_list_app/view/screen/screen_user_details.dart';
 
 import '../view/screen/screen_splash.dart';
 import '../view/screen/screen_user_list.dart';
@@ -35,14 +37,21 @@ final GoRouter appRouter = GoRouter(
       path: AppRouter.screenUserList,
       builder:
           (context, state) => BlocProvider<BlocGetUserList>(
-        create:
-            (_) => BlocGetUserList(
-            repositoryGetUserList:
-            serviceInjector<IRepositoryGetUserList>(),
-            connectionCheck: serviceInjector<IConnectionCheck>()
-        ),
-        child: ScreenUserList(),
-      ),
+            create:
+                (_) => BlocGetUserList(
+                  repositoryGetUserList:
+                      serviceInjector<IRepositoryGetUserList>(),
+                  connectionCheck: serviceInjector<IConnectionCheck>(),
+                ),
+            child: ScreenUserList(),
+          ),
+    ),
+    GoRoute(
+      path: AppRouter.screenUserDetails,
+      builder: (context, state) {
+        final user = state.extra as User;
+        return ScreenUserDetails(user: user);
+      },
     ),
   ],
 );
