@@ -7,4 +7,6 @@ import 'package:user_list_app/network/model/model_user_list.dart';
 
 abstract class IRepositoryGetUserList {
   Future<ModelUserList> getUserListFromRepository({required int pageNo});
+  Future<ModelUserList> getLocalUserListFromRepository();
+  Future<ModelUserList> loadMoreUserFromRepository({required int pageNo});
 }
