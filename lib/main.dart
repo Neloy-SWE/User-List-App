@@ -4,11 +4,14 @@ Email: taufiqneloy.swe@gmail.com
 */
 
 import 'package:flutter/material.dart';
+import 'package:user_list_app/dependency/service_injection.dart';
 import 'package:user_list_app/router/app_router.dart';
 import 'package:user_list_app/view/utility/app_text.dart';
 import 'package:user_list_app/view/utility/app_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await injectService();
   runApp(MyApp());
 }
 

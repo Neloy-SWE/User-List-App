@@ -4,9 +4,15 @@ Email: taufiqneloy.swe@gmail.com
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:user_list_app/bloc/bloc_get_user_list/bloc_get_user_list.dart';
+import 'package:user_list_app/dependency/service_injection.dart';
+import 'package:user_list_app/network/connection_check/i_connection_check.dart';
+import 'package:user_list_app/network/repository/repository_get_user_list/i_repository_get_user_list.dart';
 
 import '../view/screen/screen_splash.dart';
+import '../view/screen/screen_user_list.dart';
 
 final GlobalKey<NavigatorState> navigator = GlobalKey();
 
@@ -23,6 +29,20 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRouter.screenSplash,
       builder: (context, state) => ScreenSplash(),
+    ),
+
+    GoRoute(
+      path: AppRouter.screenUserList,
+      builder:
+          (context, state) => BlocProvider<BlocGetUserList>(
+        create:
+            (_) => BlocGetUserList(
+            repositoryGetUserList:
+            serviceInjector<IRepositoryGetUserList>(),
+            connectionCheck: serviceInjector<IConnectionCheck>()
+        ),
+        child: ScreenUserList(),
+      ),
     ),
   ],
 );
