@@ -6,6 +6,7 @@ Email: taufiqneloy.swe@gmail.com
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:user_list_app/network/client/client_constant.dart';
 
 class ClientInterceptor extends Interceptor {
   @override
@@ -13,6 +14,7 @@ class ClientInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    options.headers = {ClientConstant.xApiKey: ClientConstant.token};
     log(
       "\n\n\nBase URL: ${options.baseUrl}\nAPI Path: ${options.path}\nHeader: ${options.headers}\nBody: ${options.data}\nParameters: ${options.queryParameters}\n\n\n",
     );

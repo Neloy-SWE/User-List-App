@@ -7,6 +7,15 @@ class ClientConstant {
   static const String baseUrl = "https://reqres.in/api/users";
 
   // api header keys, values:
-static const String xApiKey = "x-api-key";
-static const String token = "reqres-free-v1";
+  static const String xApiKey = "x-api-key";
+  static const String token = "reqres-free-v1";
+
+  // general messages:
+  static const String somethingWentWrong = "Something went wrong!";
+  static const String checkYourInternetConnection =
+      "Check your internet connection";
+
+  // body/param keys, values:
+  static const String page = "page";
+  static const String perPage = "per_page";
 }
