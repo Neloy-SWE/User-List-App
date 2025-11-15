@@ -25,6 +25,7 @@ class AppTheme {
         color: Colors.white,
         fontSize: 22,
       ),
+      iconTheme: IconThemeData(color: Colors.white)
     ),
 
     textTheme: TextTheme(
@@ -54,6 +55,13 @@ class AppTheme {
         fontFamily: AppFont.fontRegular,
         color: Colors.black,
         fontSize: 14,
+      ),
+
+      // for dialogue text
+      bodySmall: TextStyle(
+        fontFamily: AppFont.fontBold,
+        color: Colors.black,
+        fontSize: 12,
       ),
     ),
   );

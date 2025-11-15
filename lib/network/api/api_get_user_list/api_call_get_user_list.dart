@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:user_list_app/network/client/client.dart';
 import 'package:user_list_app/network/model/model_user_list.dart';
 
+import '../../app_exception.dart';
 import '../../client/client_constant.dart';
 import 'i_api_call_get_user_list.dart';
 
@@ -23,7 +24,10 @@ class ApiCallGetUserList extends IApiCallGetUserList {
     if (response.statusCode == 200) {
       return ModelUserList.fromJson(response.data);
     } else {
-      throw Exception(ClientConstant.somethingWentWrong);
+      throw AppException(
+        errorType: ClientConstant.apiCallFail,
+        message: ClientConstant.contactWithDeveloper,
+      );
     }
   }
 }

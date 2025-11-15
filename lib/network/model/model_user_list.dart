@@ -5,16 +5,18 @@ Email: taufiqneloy.swe@gmail.com
 
 import 'dart:convert';
 
-class ModelUserList {
-  int? page;
-  int? perPage;
-  int? total;
-  int? totalPages;
-  List<User>? userList;
-  Support? support;
-  Meta? meta;
+import 'package:equatable/equatable.dart';
 
-  ModelUserList({
+class ModelUserList extends Equatable{
+  final int? page;
+  final int? perPage;
+  final int? total;
+  final int? totalPages;
+  final List<User>? userList;
+  final Support? support;
+  final Meta? meta;
+
+  const ModelUserList({
     this.page,
     this.perPage,
     this.total,
@@ -24,8 +26,26 @@ class ModelUserList {
     this.meta,
   });
 
-  factory ModelUserList.fromRawJson(String str) =>
-      ModelUserList.fromJson(json.decode(str));
+  ModelUserList copyWith({
+    int? page,
+    int? perPage,
+    int? total,
+    int? totalPages,
+    List<User>? data,
+    Support? support,
+    Meta? meta,
+  }) =>
+      ModelUserList(
+        page: page ?? this.page,
+        perPage: perPage ?? this.perPage,
+        total: total ?? this.total,
+        totalPages: totalPages ?? this.totalPages,
+        userList: data ?? userList,
+        support: support ?? this.support,
+        meta: meta ?? this.meta,
+      );
+
+  factory ModelUserList.fromRawJson(String str) => ModelUserList.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -34,10 +54,7 @@ class ModelUserList {
     perPage: json["per_page"],
     total: json["total"],
     totalPages: json["total_pages"],
-    userList:
-        json["data"] == null
-            ? []
-            : List<User>.from(json["data"]!.map((x) => User.fromJson(x))),
+    userList: json["data"] == null ? [] : List<User>.from(json["data"]!.map((x) => User.fromJson(x))),
     support: json["support"] == null ? null : Support.fromJson(json["support"]),
     meta: json["_meta"] == null ? null : Meta.fromJson(json["_meta"]),
   );
@@ -47,23 +64,44 @@ class ModelUserList {
     "per_page": perPage,
     "total": total,
     "total_pages": totalPages,
-    "data":
-        userList == null
-            ? []
-            : List<dynamic>.from(userList!.map((x) => x.toJson())),
+    "data": userList == null ? [] : List<dynamic>.from(userList!.map((x) => x.toJson())),
     "support": support?.toJson(),
     "_meta": meta?.toJson(),
   };
+
+  @override
+  List<Object?> get props => [userList];
 }
 
-class User {
-  int? id;
-  String? email;
-  String? firstName;
-  String? lastName;
-  String? avatar;
+class User extends Equatable{
+  final int? id;
+  final String? email;
+  final String? firstName;
+  final String? lastName;
+  final String? avatar;
 
-  User({this.id, this.email, this.firstName, this.lastName, this.avatar});
+  const User({
+    this.id,
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.avatar,
+  });
+
+  User copyWith({
+    int? id,
+    String? email,
+    String? firstName,
+    String? lastName,
+    String? avatar,
+  }) =>
+      User(
+        id: id ?? this.id,
+        email: email ?? this.email,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        avatar: avatar ?? this.avatar,
+      );
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
@@ -84,16 +122,19 @@ class User {
     "last_name": lastName,
     "avatar": avatar,
   };
+
+  @override
+  List<Object?> get props => [id, email, firstName, lastName, avatar];
 }
 
 class Meta {
-  String? poweredBy;
-  String? upgradeUrl;
-  String? docsUrl;
-  String? templateGallery;
-  String? message;
-  List<String>? features;
-  String? upgradeCta;
+  final String? poweredBy;
+  final String? upgradeUrl;
+  final String? docsUrl;
+  final String? templateGallery;
+  final String? message;
+  final List<String>? features;
+  final String? upgradeCta;
 
   Meta({
     this.poweredBy,
@@ -105,6 +146,25 @@ class Meta {
     this.upgradeCta,
   });
 
+  Meta copyWith({
+    String? poweredBy,
+    String? upgradeUrl,
+    String? docsUrl,
+    String? templateGallery,
+    String? message,
+    List<String>? features,
+    String? upgradeCta,
+  }) =>
+      Meta(
+        poweredBy: poweredBy ?? this.poweredBy,
+        upgradeUrl: upgradeUrl ?? this.upgradeUrl,
+        docsUrl: docsUrl ?? this.docsUrl,
+        templateGallery: templateGallery ?? this.templateGallery,
+        message: message ?? this.message,
+        features: features ?? this.features,
+        upgradeCta: upgradeCta ?? this.upgradeCta,
+      );
+
   factory Meta.fromRawJson(String str) => Meta.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
@@ -115,10 +175,7 @@ class Meta {
     docsUrl: json["docs_url"],
     templateGallery: json["template_gallery"],
     message: json["message"],
-    features:
-        json["features"] == null
-            ? []
-            : List<String>.from(json["features"]!.map((x) => x)),
+    features: json["features"] == null ? [] : List<String>.from(json["features"]!.map((x) => x)),
     upgradeCta: json["upgrade_cta"],
   );
 
@@ -128,24 +185,40 @@ class Meta {
     "docs_url": docsUrl,
     "template_gallery": templateGallery,
     "message": message,
-    "features":
-        features == null ? [] : List<dynamic>.from(features!.map((x) => x)),
+    "features": features == null ? [] : List<dynamic>.from(features!.map((x) => x)),
     "upgrade_cta": upgradeCta,
   };
 }
 
 class Support {
-  String? url;
-  String? text;
+  final String? url;
+  final String? text;
 
-  Support({this.url, this.text});
+  Support({
+    this.url,
+    this.text,
+  });
+
+  Support copyWith({
+    String? url,
+    String? text,
+  }) =>
+      Support(
+        url: url ?? this.url,
+        text: text ?? this.text,
+      );
 
   factory Support.fromRawJson(String str) => Support.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Support.fromJson(Map<String, dynamic> json) =>
-      Support(url: json["url"], text: json["text"]);
+  factory Support.fromJson(Map<String, dynamic> json) => Support(
+    url: json["url"],
+    text: json["text"],
+  );
 
-  Map<String, dynamic> toJson() => {"url": url, "text": text};
+  Map<String, dynamic> toJson() => {
+    "url": url,
+    "text": text,
+  };
 }
