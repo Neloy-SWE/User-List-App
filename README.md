@@ -44,6 +44,9 @@ caching, lazy loading, retry options, and pull-to-refresh.
     - get_it: ^9.0.5
 - internet check:
     - connectivity_plus: ^7.0.0
+- testing:
+    - bloc_test: ^10.0.0
+    - mocktail: ^1.0.4
 
 ## Api:
 
