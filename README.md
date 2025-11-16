@@ -65,7 +65,7 @@ To run this project locally, follow these steps:
 2. **Navigate to the project directory(root folder)**:
 
   ```bash
-  cd cd User-List-App
+  cd User-List-App
 ```
 
 3. **Install dependencies**:
@@ -183,6 +183,8 @@ To run this project locally, follow these steps:
 2. Add “Report Problem” option for clients.
 3. Role based authentication.
 4. add, update, delete option of users.
+5. add more users for better visualization of lazy loading.
+6. add dedicated search api by username.
 
 ### Contact:
 

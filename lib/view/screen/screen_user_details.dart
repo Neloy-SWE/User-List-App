@@ -18,33 +18,43 @@ class ScreenUserDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppText.userDetails)),
-      body: ListView(
-        padding: MediaQuery.of(context).size.width > 750
-            ? EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.2, vertical: 35) : EdgeInsets.all(25),
-        physics: BouncingScrollPhysics(),
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: CustomProfileImageView(radius: 50, imageLink: user.avatar!),
-          ),
-          AppSize.gapH20,
-          Text(
-            "${user.firstName!} ${user.lastName!}",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          Divider(color: Colors.black),
-          AppSize.gapH20,
-          optionText(
-            context: context,
-            option: AppText.emailColon,
-            result: user.email!,
-          ),
-          optionText(
-            context: context,
-            option: AppText.phoneColon,
-            result: "N/A",
-          ),
-        ],
+      body: SafeArea(
+        child: ListView(
+          padding:
+              MediaQuery.of(context).size.width > 750
+                  ? EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.2,
+                    vertical: 35,
+                  )
+                  : EdgeInsets.all(25),
+          physics: BouncingScrollPhysics(),
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: CustomProfileImageView(
+                radius: 50,
+                imageLink: user.avatar!,
+              ),
+            ),
+            AppSize.gapH20,
+            Text(
+              "${user.firstName!} ${user.lastName!}",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            Divider(color: Colors.black),
+            AppSize.gapH20,
+            optionText(
+              context: context,
+              option: AppText.emailColon,
+              result: user.email!,
+            ),
+            optionText(
+              context: context,
+              option: AppText.phoneColon,
+              result: "N/A",
+            ),
+          ],
+        ),
       ),
     );
   }
